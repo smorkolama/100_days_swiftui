@@ -34,6 +34,15 @@ struct ContentView: View {
                     DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                 }
+                
+                // Alternate version using Section
+//                Section {
+//                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+//                        .labelsHidden()
+//                }  header: {
+//                    Text("When do you want to wake up?")
+//                        .font(.headline)
+//                }
 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Desired amount of sleep")
@@ -45,8 +54,14 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Daily coffee intake")
                         .font(.headline)
-                    
+
                     Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+
+                    Picker("Daily coffee intake", selection: $coffeeAmount) {
+                        ForEach(1...20, id: \.self) {
+                            Text("\($0)")
+                        }
+                    }
                 }
             }
             .navigationTitle("BetterRest")
