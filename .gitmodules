@@ -1,0 +1,3 @@
+[submodule "simple-swiftui"]
+	path = simple-swiftui
+	url = https://github.com/twostraws/simple-swiftui
