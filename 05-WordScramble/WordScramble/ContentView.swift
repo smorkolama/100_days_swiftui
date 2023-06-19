@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var errorMessage = ""
     @State private var showingError = false
 
+    @State private var score = 0
+
     var body: some View {
         NavigationView {
             List {
@@ -32,6 +34,11 @@ struct ContentView: View {
                             Text(word)
                         }
                     }
+                }
+
+                Section {
+                    Text("Score: \(score)")
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
             .navigationTitle(rootWord)
@@ -87,10 +94,15 @@ struct ContentView: View {
             usedWords.insert(answer, at: 0)
         }
         newWord = ""
+
+        withAnimation {
+            updateScore()
+        }
     }
 
     func startGame() {
         usedWords.removeAll()
+        score = 0
 
         // 1. Find the URL for start.txt in our app bundle
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
@@ -146,6 +158,15 @@ struct ContentView: View {
         errorTitle = title
         errorMessage = message
         showingError = true
+    }
+
+    // MARK: - Score
+
+    func updateScore() {
+        score = 0
+        for usedWord in usedWords {
+            score += usedWord.count
+        }
     }
 }
 
