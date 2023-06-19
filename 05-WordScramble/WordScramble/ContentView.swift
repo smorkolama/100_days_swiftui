@@ -51,11 +51,6 @@ struct ContentView: View {
         // Tutorial uses answer.count but this works as well right?
         guard answer.isEmpty == false else { return }
 
-        withAnimation {
-            usedWords.insert(answer, at: 0)
-        }
-        newWord = ""
-
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original")
             return
@@ -70,6 +65,11 @@ struct ContentView: View {
             wordError(title: "Word not recognized", message: "You can't just make them up, you know!")
             return
         }
+
+        withAnimation {
+            usedWords.insert(answer, at: 0)
+        }
+        newWord = ""
     }
 
     func startGame() {
