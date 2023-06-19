@@ -17,12 +17,16 @@ struct ContentView: View {
             List {
                 Section {
                     TextField("Enter your word", text: $newWord)
+                        .textInputAutocapitalization(.never) // don't capitalize first letter
                 }
 
                 Section {
                     // Note: Using id: \.self would cause problems if there were lots of duplicates in usedWords, but soon enough we’ll be disallowing that so it’s not a problem.
                     ForEach(usedWords, id: \.self) { word in
-                        Text(word)
+                        HStack {
+                            Image(systemName: "\(word.count).circle")
+                            Text(word)
+                        }
                     }
                 }
             }
@@ -37,7 +41,9 @@ struct ContentView: View {
         // Tutorial uses answer.count but this works as well right?
         guard answer.isEmpty == false else { return }
 
-        usedWords.insert(answer, at: 0)
+        withAnimation {
+            usedWords.insert(answer, at: 0)
+        }
         newWord = ""
     }
 }
