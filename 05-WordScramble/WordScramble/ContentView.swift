@@ -51,6 +51,16 @@ struct ContentView: View {
         // Tutorial uses answer.count but this works as well right?
         guard answer.isEmpty == false else { return }
 
+        guard answer.count >= 3 else {
+            wordError(title: "Word too short", message: "Answers need to be 3 letters or more")
+            return
+        }
+
+        guard answer != rootWord else {
+            wordError(title: "Word not allowed", message: "This is just the start word")
+            return
+        }
+
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original")
             return
