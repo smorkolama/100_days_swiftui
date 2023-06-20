@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AttachedAnimationView.swift
 //  Animations
 //
 //  Created by Benjamin van den Hout on 19/06/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct AttachedAnimationView: View {
     @State private var animationAmount = 1.0
 
     var body: some View {
@@ -59,6 +59,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        AttachedAnimationView()
     }
 }

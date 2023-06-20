@@ -10,26 +10,32 @@ import SwiftUI
 @main
 struct AnimationsApp: App {
     enum Tab {
-        case button
+        case attached
         case binding
+        case explicit
     }
 
-    @State private var selection: Tab = .binding
+    @State private var selection: Tab = .explicit
 
     var body: some Scene {
 
         WindowGroup {
             TabView(selection: $selection) {
-                ContentView()
+                AttachedAnimationView()
                     .tabItem {
-                        Label("Button", systemImage: "button.programmable")
+                        Label("Attached", systemImage: "button.programmable")
                     }
-                    .tag(Tab.button)
-                BindingView()
+                    .tag(Tab.attached)
+                BindingAnimationView()
                     .tabItem {
                         Label("Binding", systemImage: "pencil")
                     }
                     .tag(Tab.binding)
+                ExplicitAnimationView()
+                    .tabItem {
+                        Label("Explicit", systemImage: "exclamationmark.triangle")
+                    }
+                    .tag(Tab.explicit)
             }
         }
     }

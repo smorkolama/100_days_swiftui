@@ -1,5 +1,5 @@
 //
-//  BindingView.swift
+//  BindingAnimationView.swift
 //  Animations
 //
 //  Created by Benjamin van den Hout on 20/06/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BindingView: View {
+struct BindingAnimationView: View {
     @State private var animationAmount = 1.0
 
     var body: some View {
@@ -36,6 +36,6 @@ struct BindingView: View {
 
 struct BindingView_Previews: PreviewProvider {
     static var previews: some View {
-        BindingView()
+        BindingAnimationView()
     }
 }

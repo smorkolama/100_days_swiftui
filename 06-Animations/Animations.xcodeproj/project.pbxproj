@@ -8,19 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		7AFDD8712A409D2200DE2737 /* AnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8702A409D2200DE2737 /* AnimationsApp.swift */; };
-		7AFDD8732A409D2200DE2737 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8722A409D2200DE2737 /* ContentView.swift */; };
+		7AFDD8732A409D2200DE2737 /* AttachedAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8722A409D2200DE2737 /* AttachedAnimationView.swift */; };
 		7AFDD8752A409D2200DE2737 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFDD8742A409D2200DE2737 /* Assets.xcassets */; };
 		7AFDD8782A409D2200DE2737 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFDD8772A409D2200DE2737 /* Preview Assets.xcassets */; };
-		7AFDD87F2A419D4900DE2737 /* BindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD87E2A419D4900DE2737 /* BindingView.swift */; };
+		7AFDD87F2A419D4900DE2737 /* BindingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */; };
+		7AFDD8812A41A25F00DE2737 /* ExplicitAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7AFDD86D2A409D2200DE2737 /* Animations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFDD8702A409D2200DE2737 /* AnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsApp.swift; sourceTree = "<group>"; };
-		7AFDD8722A409D2200DE2737 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7AFDD8722A409D2200DE2737 /* AttachedAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedAnimationView.swift; sourceTree = "<group>"; };
 		7AFDD8742A409D2200DE2737 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AFDD8772A409D2200DE2737 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7AFDD87E2A419D4900DE2737 /* BindingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingView.swift; sourceTree = "<group>"; };
+		7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingAnimationView.swift; sourceTree = "<group>"; };
+		7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplicitAnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,10 +56,11 @@
 			isa = PBXGroup;
 			children = (
 				7AFDD8702A409D2200DE2737 /* AnimationsApp.swift */,
-				7AFDD8722A409D2200DE2737 /* ContentView.swift */,
+				7AFDD8722A409D2200DE2737 /* AttachedAnimationView.swift */,
+				7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */,
+				7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */,
 				7AFDD8742A409D2200DE2737 /* Assets.xcassets */,
 				7AFDD8762A409D2200DE2737 /* Preview Content */,
-				7AFDD87E2A419D4900DE2737 /* BindingView.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -140,9 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AFDD8732A409D2200DE2737 /* ContentView.swift in Sources */,
+				7AFDD8732A409D2200DE2737 /* AttachedAnimationView.swift in Sources */,
 				7AFDD8712A409D2200DE2737 /* AnimationsApp.swift in Sources */,
-				7AFDD87F2A419D4900DE2737 /* BindingView.swift in Sources */,
+				7AFDD87F2A419D4900DE2737 /* BindingAnimationView.swift in Sources */,
+				7AFDD8812A41A25F00DE2737 /* ExplicitAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
