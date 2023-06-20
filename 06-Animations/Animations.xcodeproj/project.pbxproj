@@ -13,6 +13,7 @@
 		7AFDD8782A409D2200DE2737 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFDD8772A409D2200DE2737 /* Preview Assets.xcassets */; };
 		7AFDD87F2A419D4900DE2737 /* BindingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */; };
 		7AFDD8812A41A25F00DE2737 /* ExplicitAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */; };
+		7AFDD8832A41A9DE00DE2737 /* GesturesAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		7AFDD8772A409D2200DE2737 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingAnimationView.swift; sourceTree = "<group>"; };
 		7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplicitAnimationView.swift; sourceTree = "<group>"; };
+		7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesAnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				7AFDD8722A409D2200DE2737 /* AttachedAnimationView.swift */,
 				7AFDD87E2A419D4900DE2737 /* BindingAnimationView.swift */,
 				7AFDD8802A41A25F00DE2737 /* ExplicitAnimationView.swift */,
+				7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */,
 				7AFDD8742A409D2200DE2737 /* Assets.xcassets */,
 				7AFDD8762A409D2200DE2737 /* Preview Content */,
 			);
@@ -146,6 +149,7 @@
 				7AFDD8732A409D2200DE2737 /* AttachedAnimationView.swift in Sources */,
 				7AFDD8712A409D2200DE2737 /* AnimationsApp.swift in Sources */,
 				7AFDD87F2A419D4900DE2737 /* BindingAnimationView.swift in Sources */,
+				7AFDD8832A41A9DE00DE2737 /* GesturesAnimationView.swift in Sources */,
 				7AFDD8812A41A25F00DE2737 /* ExplicitAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

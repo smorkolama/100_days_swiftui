@@ -13,6 +13,7 @@ struct AnimationsApp: App {
         case attached
         case binding
         case explicit
+        case gestures
     }
 
     @State private var selection: Tab = .explicit
@@ -36,6 +37,11 @@ struct AnimationsApp: App {
                         Label("Explicit", systemImage: "exclamationmark.triangle")
                     }
                     .tag(Tab.explicit)
+                GesturesAnimationView()
+                    .tabItem {
+                        Label("Gestures", systemImage: "hand.raised")
+                    }
+                    .tag(Tab.gestures)
             }
         }
     }

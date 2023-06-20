@@ -30,6 +30,8 @@ struct BindingAnimationView: View {
             .foregroundColor(.white)
             .clipShape(Circle())
             .scaleEffect(animationAmount)
+
+            Spacer()
         }
     }
 }
