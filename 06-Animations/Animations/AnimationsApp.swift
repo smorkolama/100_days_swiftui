@@ -16,9 +16,10 @@ struct AnimationsApp: App {
         case gestures
         case hello
         case hide
+        case pivot
     }
 
-    @State private var selection: Tab = .hide
+    @State private var selection: Tab = .pivot
 
     var body: some Scene {
 
@@ -54,6 +55,11 @@ struct AnimationsApp: App {
                         Label("Hide", systemImage: "circle.dotted")
                     }
                     .tag(Tab.hide)
+                PivotView()
+                    .tabItem {
+                        Label("Pivot", systemImage: "rotate.right")
+                    }
+                    .tag(Tab.pivot)
             }
         }
     }

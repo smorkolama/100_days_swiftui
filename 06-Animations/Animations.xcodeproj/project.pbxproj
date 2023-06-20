@@ -16,6 +16,7 @@
 		7AFDD8832A41A9DE00DE2737 /* GesturesAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */; };
 		7AFDD8852A41ABDC00DE2737 /* HelloView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8842A41ABDC00DE2737 /* HelloView.swift */; };
 		7AFDD8872A41C3D200DE2737 /* HideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8862A41C3D200DE2737 /* HideView.swift */; };
+		7AFDD8892A41C55700DE2737 /* PivotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDD8882A41C55700DE2737 /* PivotView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesAnimationView.swift; sourceTree = "<group>"; };
 		7AFDD8842A41ABDC00DE2737 /* HelloView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloView.swift; sourceTree = "<group>"; };
 		7AFDD8862A41C3D200DE2737 /* HideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideView.swift; sourceTree = "<group>"; };
+		7AFDD8882A41C55700DE2737 /* PivotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				7AFDD8822A41A9DE00DE2737 /* GesturesAnimationView.swift */,
 				7AFDD8842A41ABDC00DE2737 /* HelloView.swift */,
 				7AFDD8862A41C3D200DE2737 /* HideView.swift */,
+				7AFDD8882A41C55700DE2737 /* PivotView.swift */,
 				7AFDD8742A409D2200DE2737 /* Assets.xcassets */,
 				7AFDD8762A409D2200DE2737 /* Preview Content */,
 			);
@@ -159,6 +162,7 @@
 				7AFDD8852A41ABDC00DE2737 /* HelloView.swift in Sources */,
 				7AFDD8832A41A9DE00DE2737 /* GesturesAnimationView.swift in Sources */,
 				7AFDD8812A41A25F00DE2737 /* ExplicitAnimationView.swift in Sources */,
+				7AFDD8892A41C55700DE2737 /* PivotView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
