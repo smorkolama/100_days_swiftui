@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var numQuestions = 0
     @State private var showingFinal = false
 
+    @State private var animationAmounts = [0.0, 0.0, 0.0]
     var body: some View {
         ZStack {
             // dont use .background since it only does the VStack
@@ -62,10 +63,12 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
+                            animateIfCorrect(number)
                             flagTapped(number)
                         } label: {
                             FlagImage(countries[number].lowercased())
                         }
+                        .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
                     }
                 }
             }
@@ -82,7 +85,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -106,6 +109,10 @@ struct ContentView: View {
 
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+
+        for number in 0..<3 {
+            animationAmounts[number] = 0.0
+        }
     }
     
     func reset() {
@@ -113,7 +120,20 @@ struct ContentView: View {
         numQuestions = 0
         score = 0
     }
+
+    // MARK: Project 6 challenges
+
+    func isCorrect(_ number: Int) -> Bool {
+        return number == correctAnswer
+    }
     
+    func animateIfCorrect(_ number: Int) {
+        if isCorrect(number) {
+            withAnimation {
+                animationAmounts[number] += 360
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
