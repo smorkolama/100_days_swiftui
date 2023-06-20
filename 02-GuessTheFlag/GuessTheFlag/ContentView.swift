@@ -66,9 +66,11 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
-                            animateIfCorrect(number)
-                            updateOpacities(number)
-                            updateScale(number)
+                            withAnimation {
+                                animateIfCorrect(number)
+                                updateOpacities(number)
+                                updateScale(number)
+                            }
                             flagTapped(number)
                         } label: {
                             FlagImage(countries[number].lowercased())
@@ -138,25 +140,19 @@ struct ContentView: View {
 
     func animateIfCorrect(_ number: Int) {
         if isCorrect(number) {
-            withAnimation {
-                animationAmounts[number] += 360
-            }
+            animationAmounts[number] += 360
         }
     }
 
     func updateOpacities(_ number: Int) {
-        withAnimation {
-            for number in 0..<3 {
-                opacities[number] = isCorrect(number) ? 1.0 : 0.25
-            }
+        for number in 0..<3 {
+            opacities[number] = isCorrect(number) ? 1.0 : 0.25
         }
     }
 
     func updateScale(_ number: Int) {
-        withAnimation {
-            for number in 0..<3 {
-                scales[number] = isCorrect(number) ? 1.0 : 0.25
-            }
+        for number in 0..<3 {
+            scales[number] = isCorrect(number) ? 1.0 : 0.25
         }
     }
 }
