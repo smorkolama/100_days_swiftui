@@ -19,6 +19,10 @@ struct ContentView: View {
     @State private var numQuestions = 0
     @State private var showingFinal = false
 
+    @State private var animationAmounts = [0.0, 0.0, 0.0]
+    @State private var opacities = [1.0, 1.0, 1.0]
+    @State private var scales = [1.0, 1.0, 1.0]
+
     var body: some View {
         ZStack {
             // dont use .background since it only does the VStack
@@ -62,10 +66,18 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
+                            withAnimation {
+                                animateIfCorrect(number)
+                                updateOpacities(number)
+                                updateScale(number)
+                            }
                             flagTapped(number)
                         } label: {
                             FlagImage(countries[number].lowercased())
                         }
+                        .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                        .opacity(opacities[number])
+                        .scaleEffect(scales[number])
                     }
                 }
             }
@@ -82,7 +94,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -106,6 +118,12 @@ struct ContentView: View {
 
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+
+        for number in 0..<3 {
+            animationAmounts[number] = 0.0
+            opacities[number] = 1.0
+            scales[number] = 1.0
+        }
     }
     
     func reset() {
@@ -113,7 +131,30 @@ struct ContentView: View {
         numQuestions = 0
         score = 0
     }
-    
+
+    // MARK: Project 6 challenges
+
+    func isCorrect(_ number: Int) -> Bool {
+        return number == correctAnswer
+    }
+
+    func animateIfCorrect(_ number: Int) {
+        if isCorrect(number) {
+            animationAmounts[number] += 360
+        }
+    }
+
+    func updateOpacities(_ number: Int) {
+        for number in 0..<3 {
+            opacities[number] = isCorrect(number) ? 1.0 : 0.25
+        }
+    }
+
+    func updateScale(_ number: Int) {
+        for number in 0..<3 {
+            scales[number] = isCorrect(number) ? 1.0 : 0.25
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
