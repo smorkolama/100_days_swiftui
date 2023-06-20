@@ -20,6 +20,8 @@ struct ContentView: View {
     @State private var showingFinal = false
 
     @State private var animationAmounts = [0.0, 0.0, 0.0]
+    @State private var opacities = [1.0, 1.0, 1.0]
+
     var body: some View {
         ZStack {
             // dont use .background since it only does the VStack
@@ -64,11 +66,13 @@ struct ContentView: View {
                     ForEach(0..<3) { number in
                         Button {
                             animateIfCorrect(number)
+                            updateOpacities(number)
                             flagTapped(number)
                         } label: {
                             FlagImage(countries[number].lowercased())
                         }
                         .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                        .opacity(opacities[number])
                     }
                 }
             }
@@ -112,6 +116,7 @@ struct ContentView: View {
 
         for number in 0..<3 {
             animationAmounts[number] = 0.0
+            opacities[number] = 1.0
         }
     }
     
@@ -131,6 +136,14 @@ struct ContentView: View {
         if isCorrect(number) {
             withAnimation {
                 animationAmounts[number] += 360
+            }
+        }
+    }
+
+    func updateOpacities(_ number: Int) {
+        withAnimation {
+            for number in 0..<3 {
+                opacities[number] = isCorrect(number) ? 1.0 : 0.25
             }
         }
     }
