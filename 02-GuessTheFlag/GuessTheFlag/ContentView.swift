@@ -21,6 +21,7 @@ struct ContentView: View {
 
     @State private var animationAmounts = [0.0, 0.0, 0.0]
     @State private var opacities = [1.0, 1.0, 1.0]
+    @State private var scales = [1.0, 1.0, 1.0]
 
     var body: some View {
         ZStack {
@@ -67,12 +68,14 @@ struct ContentView: View {
                         Button {
                             animateIfCorrect(number)
                             updateOpacities(number)
+                            updateScale(number)
                             flagTapped(number)
                         } label: {
                             FlagImage(countries[number].lowercased())
                         }
                         .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
                         .opacity(opacities[number])
+                        .scaleEffect(scales[number])
                     }
                 }
             }
@@ -117,6 +120,7 @@ struct ContentView: View {
         for number in 0..<3 {
             animationAmounts[number] = 0.0
             opacities[number] = 1.0
+            scales[number] = 1.0
         }
     }
     
@@ -131,7 +135,7 @@ struct ContentView: View {
     func isCorrect(_ number: Int) -> Bool {
         return number == correctAnswer
     }
-    
+
     func animateIfCorrect(_ number: Int) {
         if isCorrect(number) {
             withAnimation {
@@ -144,6 +148,14 @@ struct ContentView: View {
         withAnimation {
             for number in 0..<3 {
                 opacities[number] = isCorrect(number) ? 1.0 : 0.25
+            }
+        }
+    }
+
+    func updateScale(_ number: Int) {
+        withAnimation {
+            for number in 0..<3 {
+                scales[number] = isCorrect(number) ? 1.0 : 0.25
             }
         }
     }
