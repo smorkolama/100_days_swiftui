@@ -15,9 +15,10 @@ struct AnimationsApp: App {
         case explicit
         case gestures
         case hello
+        case hide
     }
 
-    @State private var selection: Tab = .hello
+    @State private var selection: Tab = .hide
 
     var body: some Scene {
 
@@ -48,6 +49,11 @@ struct AnimationsApp: App {
                         Label("Hello", systemImage: "hand.raised")
                     }
                     .tag(Tab.hello)
+                HideView()
+                    .tabItem {
+                        Label("Hide", systemImage: "circle.dotted")
+                    }
+                    .tag(Tab.hide)
             }
         }
     }
