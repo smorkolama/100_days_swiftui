@@ -14,9 +14,10 @@ struct AnimationsApp: App {
         case binding
         case explicit
         case gestures
+        case hello
     }
 
-    @State private var selection: Tab = .explicit
+    @State private var selection: Tab = .hello
 
     var body: some Scene {
 
@@ -39,9 +40,14 @@ struct AnimationsApp: App {
                     .tag(Tab.explicit)
                 GesturesAnimationView()
                     .tabItem {
-                        Label("Gestures", systemImage: "hand.raised")
+                        Label("Gestures", systemImage: "hand.wave")
                     }
                     .tag(Tab.gestures)
+                HelloView()
+                    .tabItem {
+                        Label("Hello", systemImage: "hand.raised")
+                    }
+                    .tag(Tab.hello)
             }
         }
     }
