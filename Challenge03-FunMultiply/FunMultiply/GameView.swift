@@ -29,8 +29,10 @@ struct GameView: View {
             VStack {
                 HStack {
                     Text("Score: \(currentScore)")
+                        .padding([.leading], 5)
                     Spacer()
                     Text("Vraag \(questionIndex+1) van \(questions.count)")
+                        .padding([.trailing], 5)
                 }
 
                 Spacer()
