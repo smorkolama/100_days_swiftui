@@ -34,7 +34,7 @@ struct GameView: View {
 
             Spacer()
 
-            Text("Hoeveel is \(question.value) x \(question.table)?")
+            Text("Hoeveel is \(question.multiplicationValue) x \(question.table)?")
                 .font(.largeTitle.weight(.bold))
 
             Spacer()
@@ -88,7 +88,7 @@ struct GameView: View {
             scoreTitle = "Helaas!"
         }
 
-        scoreExplanation = "\(question.table) x \(question.value) = \(question.desiredAnswer)"
+        scoreExplanation = "\(question.table) x \(question.multiplicationValue) = \(question.desiredAnswer)"
         showingScore = true
     }
 
@@ -155,6 +155,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(questions: Question.generate(table: 2, numQuestions: 5))
+        GameView(questions: Question.generateQuestions(table: 2, numQuestions: 5))
     }
 }

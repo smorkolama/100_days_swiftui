@@ -52,7 +52,7 @@ struct ContentView: View {
             .navigationTitle("Tafels oefenen")
         }
         .fullScreenCover(isPresented: $showGameSheet) {
-            GameView(questions: Question.generate(table: table, numQuestions: numQuestions))
+            GameView(questions: Question.generateQuestions(table: table, numQuestions: numQuestions))
         }
     }
 }
