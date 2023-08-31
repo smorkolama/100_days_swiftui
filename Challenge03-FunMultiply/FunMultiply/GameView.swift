@@ -12,54 +12,47 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var questions: [Question]
-    @State var correctAnswer: Int
-
-    @State var score = 0
     @State var index = 0
+    @State var score = 0
+
     @State private var scoreTitle = ""
     @State private var scoreExplanation = ""
     @State private var showingScore = false
-
+    @State private var showingFinal = false
 
     @State private var animationAmounts = [Double](repeating: 0.0, count: 10)
     @State private var opacities = [Double](repeating: 1.0, count: 10)
 
     var body: some View {
+        let question = questions[index]
         VStack {
-            if let question = getQuestion(index) {
-                VStack {
-                    Text("Score: \(score)")
-                    Spacer()
-                    Text("Hoeveel is \(question.value) keer \(question.table)?")
+            Text("Score: \(score)")
 
-                    Spacer()
+            Spacer()
 
-                    ForEach(0..<10) { number in
-                        let answer = question.answers[number]
-                        Button {
-                            withAnimation {
-                                animateIfCorrect(number, correct: question.checkResult(answer))
-                                updateOpacities(number, correct: question.checkResult(answer))
-                            }
-                            checkAnswer(question, answer: question.answers[number])
-                        } label: {
-                            Text("\(answer)")
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                        }
-//                        .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
-                        .opacity(opacities[number])
+            Text("Hoeveel is \(question.value) keer \(question.table)?")
+
+            Spacer()
+
+            ForEach(0..<10) { number in
+                let answer = question.answers[number]
+
+                Button {
+                    withAnimation {
+                        animateIfCorrect(number)
+                        updateOpacities(number, correct: question.checkResult(answer))
                     }
-
-                    Spacer()
+                    checkAnswer(question, answer: question.answers[number])
+                } label: {
+                    Text("\(answer)")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.blue)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
-                .id(index)
-            }
-            else {
-                EmptyView()
+                .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                .opacity(opacities[number])
             }
         }
         .padding()
@@ -71,6 +64,13 @@ struct GameView: View {
             VStack {
                 Text("\(scoreExplanation)\n\nJe score is nu: \(score)")
             }
+        }
+        .alert("Dat was het!", isPresented: $showingFinal) {
+            Button("Doei!") {
+                dismiss()
+            }
+        } message: {
+            Text("Je score is \(score)\nVeel succes de volgende keer!")
         }
     }
 
@@ -88,6 +88,12 @@ struct GameView: View {
     }
 
     func askQuestion() {
+        guard index + 1 < questions.count else {
+            clearOpacities()
+            showingFinal = true
+            return
+        }
+
         index += 1
 
         for number in 0..<10 {
@@ -102,17 +108,29 @@ struct GameView: View {
         return question
     }
 
-    func animateIfCorrect(_ number: Int, correct: Bool) {
-        if correct {
-            print("\(number) is correct")
+    var currentQuestion: Question {
+        questions[index]
+    }
+
+    func isCorrect(_ number: Int) -> Bool {
+        currentQuestion.answers[number] == currentQuestion.desiredAnswer
+    }
+
+    func animateIfCorrect(_ number: Int) {
+        if isCorrect(number) {
             animationAmounts[number] += 3600
         }
     }
 
     func updateOpacities(_ number: Int, correct: Bool) {
         for number in 0..<10 {
-            print("Opacity \(number) correct \(correct)")
-            opacities[number] = correct ? 1.0 : 0.25
+            opacities[number] = isCorrect(number) ? 1.0 : 0.25
+        }
+    }
+
+    func clearOpacities() {
+        for number in 0..<10 {
+            opacities[number] = 0.25
         }
     }
 

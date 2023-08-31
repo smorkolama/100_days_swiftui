@@ -46,18 +46,7 @@ struct ContentView: View {
             .navigationTitle("Tafels oefenen")
         }
         .fullScreenCover(isPresented: $showGameSheet) {
-            let questions = Question.generate(table: table,
-                                              numQuestions: numQuestions)
-
-            if let firstQuestion = questions.first {
-                GameView(questions: questions,
-                         correctAnswer: firstQuestion.desiredAnswer)
-            } else {
-                EmptyView()
-                    .onAppear {
-                        showGameSheet = false
-                    }
-            }
+            GameView(questions: Question.generate(table: table, numQuestions: numQuestions))
         }
     }
 }

@@ -14,6 +14,10 @@ struct Question: Identifiable {
     var answers: [Int]
 
     static func generate(table: Int, numQuestions: Int) -> [Question] {
+        guard numQuestions > 0 else {
+            fatalError("Cannot generate empty question list")
+        }
+
         var result = [Question]()
         for _ in 0..<numQuestions {
 
