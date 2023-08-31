@@ -10,6 +10,7 @@ import Foundation
 struct Question {
     static let minMultiplication = 1
     static let maxMultiplication = 10
+    static let numAnswers = 10
 
     /// Multiplication table
     var table: Int
@@ -59,7 +60,7 @@ struct Question {
     /// - Returns: Randomized answers
     static func generateAnswers(table: Int) -> [Int] {
         var answers = [Int]()
-        for i in 1...10 {
+        for i in 1...numAnswers {
             answers.append(i*table)
         }
         answers.shuffle()

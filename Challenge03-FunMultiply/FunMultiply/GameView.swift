@@ -12,62 +12,75 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var questions: [Question]
-    @State var index = 0
-    @State var score = 0
+    @State var questionIndex = 0
+    @State var currentScore = 0
 
-    @State private var scoreTitle = ""
-    @State private var scoreExplanation = ""
-    @State private var showingScore = false
+    @State private var showingResult = false
+    @State private var resultTitle = ""
+    @State private var resultExplanation = ""
+
     @State private var showingFinal = false
 
-    @State private var animationAmounts = [Double](repeating: 0.0, count: 10)
-    @State private var opacities = [Double](repeating: 1.0, count: 10)
+    @State private var animationAmounts = [Double](repeating: 0.0, count: Question.numAnswers)
+    @State private var opacities = [Double](repeating: 1.0, count: Question.numAnswers)
 
     var body: some View {
-        let question = questions[index]
-        VStack {
-            HStack {
-                Text("Score: \(score)")
-                Spacer()
-                Text("Vraag \(index+1) van \(questions.count)")
-            }
-
-            Spacer()
-
-            Text("Hoeveel is \(question.multiplicationValue) x \(question.table)?")
-                .font(.largeTitle.weight(.bold))
-
-            Spacer()
-
-            ForEach(0..<10) { number in
-                let answer = question.answers[number]
-
-                Button {
-                    withAnimation {
-                        animateIfCorrect(number)
-                        updateOpacities(number, correct: question.checkResult(answer))
-                    }
-                    checkAnswer(question, answer: question.answers[number])
-                } label: {
-                    Text("\(answer)")
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("Score: \(currentScore)")
+                    Spacer()
+                    Text("Vraag \(questionIndex+1) van \(questions.count)")
                 }
-                .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
-                .opacity(opacities[number])
+
+                Spacer()
+
+                Text("Hoeveel is \(currentQuestion.multiplicationValue) x \(currentQuestion.table)?")
+                    .font(.largeTitle.weight(.bold))
+
+                Spacer()
+
+                ForEach(0 ..< Question.numAnswers, id: \.self) { number in
+                    let answer = currentQuestion.answers[number]
+
+                    Button {
+                        withAnimation {
+                            animateIfCorrect(number)
+                            updateOpacities(number)
+                        }
+
+                        checkAnswer(number)
+                    } label: {
+                        Text("\(answer)")
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                    }
+                    .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
+                    .opacity(opacities[number])
+                }
+            }
+            .padding()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+
+                }
             }
         }
-        .padding()
-        .alert(scoreTitle, isPresented: $showingScore) {
+        .alert(resultTitle, isPresented: $showingResult) {
             Button("Volgende") {
                 askQuestion()
             }
         } message: {
             VStack {
-                Text("\(scoreExplanation)\n\nJe score is nu: \(score)")
+                Text("\n\(resultExplanation)\n\nJe score is nu: \(currentScore)")
             }
         }
         .alert("Dat was het!", isPresented: $showingFinal) {
@@ -75,81 +88,67 @@ struct GameView: View {
                 dismiss()
             }
         } message: {
-            Text("Je score is \(score)\nVeel succes de volgende keer!")
+            Text("Je score is \(currentScore)\nVeel succes de volgende keer!")
         }
     }
 
-    func checkAnswer(_ question: Question, answer: Int) {
-        let result = question.checkResult(answer)
-        if result {
-            score += 1
-            scoreTitle = "Yes, dat is goed!"
-        } else {
-            scoreTitle = "Helaas!"
-        }
-
-        scoreExplanation = "\(question.table) x \(question.multiplicationValue) = \(question.desiredAnswer)"
-        showingScore = true
+    private var currentQuestion: Question {
+        questions[questionIndex]
     }
 
-    func askQuestion() {
-        guard index + 1 < questions.count else {
+    private func askQuestion() {
+        guard questionIndex + 1 < questions.count else {
             clearOpacities()
             showingFinal = true
             return
         }
 
-        index += 1
+        questionIndex += 1
 
-        for number in 0..<10 {
+        for number in 0 ..< Question.numAnswers {
             animationAmounts[number] = 0.0
             opacities[number] = 1.0
         }
     }
 
-    func getQuestion(_ index: Int) -> Question? {
-        guard index < questions.count else { return nil }
-        let question = questions[index]
-        return question
+    private func checkAnswer(_ number: Int) {
+        if currentQuestion.checkResult(currentQuestion.answers[number]) {
+            currentScore += 1
+            resultTitle = "Yes, dat is goed!"
+        } else {
+            resultTitle = "Helaas!"
+        }
+
+        resultExplanation = "\(currentQuestion.table) x \(currentQuestion.multiplicationValue) = \(currentQuestion.desiredAnswer)"
+        showingResult = true
     }
 
-    var currentQuestion: Question {
-        questions[index]
-    }
-
-    func isCorrect(_ number: Int) -> Bool {
+    private func isCorrect(_ number: Int) -> Bool {
         currentQuestion.answers[number] == currentQuestion.desiredAnswer
     }
 
-    func animateIfCorrect(_ number: Int) {
+    private func animateIfCorrect(_ number: Int) {
         if isCorrect(number) {
-            animationAmounts[number] += 3600
+            animationAmounts[number] += Constant.animationDegrees
         }
     }
 
-    func updateOpacities(_ number: Int, correct: Bool) {
-        for number in 0..<10 {
-            opacities[number] = isCorrect(number) ? 1.0 : 0.25
+    private func updateOpacities(_ number: Int) {
+        for number in 0 ..< Question.numAnswers {
+            opacities[number] = isCorrect(number) ? Constant.opacityNormal : Constant.opacityDimmed
         }
     }
 
-    func clearOpacities() {
-        for number in 0..<10 {
-            opacities[number] = 0.25
+    private func clearOpacities() {
+        for number in 0 ..< Question.numAnswers {
+            opacities[number] = Constant.opacityDimmed
         }
     }
 
-    private struct DoneView: View {
-        @State var score: Int
-        var onComplete: () -> Void
-
-        var body: some View {
-            Text("Klaar!")
-
-            Button("Doei") {
-                onComplete()
-            }
-        }
+    private struct Constant {
+        static let opacityNormal = 1.0
+        static let opacityDimmed = 0.25
+        static let animationDegrees = 3600.0
     }
 }
 

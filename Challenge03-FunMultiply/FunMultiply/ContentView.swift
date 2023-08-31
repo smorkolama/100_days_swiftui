@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-let numQuestionsList = [5, 10, 20]
-
 struct ContentView: View {
     @State private var table = 2
     @State private var numQuestions = 5
@@ -25,8 +23,8 @@ struct ContentView: View {
                     }
                     Section {
                         Picker(selection: $numQuestions) {
-                            ForEach(numQuestionsList, id: \.self) { number in
-                                Text(number.formatted())
+                            ForEach(Constant.questionAmounts, id: \.self) { amount in
+                                Text(amount.formatted())
                             }
                         } label: {
                         }
@@ -54,6 +52,10 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $showGameSheet) {
             GameView(questions: Question.generateQuestions(table: table, numQuestions: numQuestions))
         }
+    }
+
+    private struct Constant {
+        static let questionAmounts = [5, 10, 20]
     }
 }
 
