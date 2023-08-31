@@ -26,11 +26,16 @@ struct GameView: View {
     var body: some View {
         let question = questions[index]
         VStack {
-            Text("Score: \(score)")
+            HStack {
+                Text("Score: \(score)")
+                Spacer()
+                Text("Vraag \(index+1) van \(questions.count)")
+            }
 
             Spacer()
 
-            Text("Hoeveel is \(question.value) keer \(question.table)?")
+            Text("Hoeveel is \(question.value) x \(question.table)?")
+                .font(.largeTitle.weight(.bold))
 
             Spacer()
 
@@ -83,7 +88,7 @@ struct GameView: View {
             scoreTitle = "Helaas!"
         }
 
-        scoreExplanation = "\(question.table) keer \(question.value) = \(question.desiredAnswer)"
+        scoreExplanation = "\(question.table) x \(question.value) = \(question.desiredAnswer)"
         showingScore = true
     }
 
@@ -148,8 +153,8 @@ struct GameView: View {
     }
 }
 
-//struct GameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameView()
-//    }
-//}
+struct GameView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameView(questions: Question.generate(table: 2, numQuestions: 5))
+    }
+}

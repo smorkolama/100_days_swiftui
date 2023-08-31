@@ -36,7 +36,6 @@ struct Question: Identifiable {
     }
 
     func checkResult(_ answer: Int) -> Bool {
-        print("Checking result for answer: \(answer) --> \(desiredAnswer == answer)")
         return desiredAnswer == answer
     }
 

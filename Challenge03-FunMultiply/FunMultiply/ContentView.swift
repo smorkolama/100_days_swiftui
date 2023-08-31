@@ -37,11 +37,17 @@ struct ContentView: View {
                     }
                 }
 
-                Button("Daar gaan we!") {
+                Button {
                     showGameSheet.toggle()
+                } label: {
+                    Text("Daar gaan we!")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.blue)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
-                .buttonStyle(.borderedProminent)
-
+                .padding()
             }
             .navigationTitle("Tafels oefenen")
         }

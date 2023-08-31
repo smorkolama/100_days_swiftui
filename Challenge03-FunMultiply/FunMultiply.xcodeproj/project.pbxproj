@@ -58,9 +58,9 @@
 				7AEDCC062AA0927200E11BA9 /* FunMultiplyApp.swift */,
 				7AEDCC082AA0927200E11BA9 /* ContentView.swift */,
 				7AEDCC142AA09C6200E11BA9 /* GameView.swift */,
+				7AEDCC162AA09CA400E11BA9 /* Question.swift */,
 				7AEDCC0A2AA0927300E11BA9 /* Assets.xcassets */,
 				7AEDCC0C2AA0927300E11BA9 /* Preview Content */,
-				7AEDCC162AA09CA400E11BA9 /* Question.swift */,
 			);
 			path = FunMultiply;
 			sourceTree = "<group>";
