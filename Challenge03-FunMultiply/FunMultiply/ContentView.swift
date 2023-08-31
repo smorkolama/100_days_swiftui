@@ -12,12 +12,18 @@ struct ContentView: View {
     @State private var numQuestions = 5
     @State private var showGameSheet = false
 
+    private let stepperRange = 1...20
+
     var body: some View {
         NavigationView {
             VStack {
                 Form {
                     Section {
-                        Stepper("De tafel van \(table.formatted())", value: $table)
+                        Stepper(value: $table,
+                                in: stepperRange,
+                                step: 1) {
+                            Text("De tafel van \(table.formatted())")
+                        }
                     } header: {
                         Text("Ik wil oefenen met")
                     }
@@ -49,6 +55,7 @@ struct ContentView: View {
             }
             .navigationTitle("Tafels oefenen")
         }
+        .navigationViewStyle(.stack)
         .fullScreenCover(isPresented: $showGameSheet) {
             GameView(questions: Question.generateQuestions(table: table, numQuestions: numQuestions))
         }

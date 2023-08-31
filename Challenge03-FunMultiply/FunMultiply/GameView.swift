@@ -27,12 +27,10 @@ struct GameView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
+                HStack() {
                     Text("Score: \(currentScore)")
-                        .padding([.leading], 5)
                     Spacer()
                     Text("Vraag \(questionIndex+1) van \(questions.count)")
-                        .padding([.trailing], 5)
                 }
 
                 Spacer()
@@ -63,8 +61,11 @@ struct GameView: View {
                     .rotation3DEffect(.degrees(animationAmounts[number]), axis: (x: 0, y: 1, z: 0))
                     .opacity(opacities[number])
                 }
+
+                Spacer()
+
             }
-            .padding()
+            .padding(.horizontal)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -72,10 +73,11 @@ struct GameView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-
                 }
+
             }
         }
+        .navigationViewStyle(.stack)
         .alert(resultTitle, isPresented: $showingResult) {
             Button("Volgende") {
                 askQuestion()
@@ -157,5 +159,8 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(questions: Question.generateQuestions(table: 2, numQuestions: 5))
+            .previewDevice(PreviewDevice(rawValue: "iPad Air 2"))
+        GameView(questions: Question.generateQuestions(table: 2, numQuestions: 5))
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
     }
 }
