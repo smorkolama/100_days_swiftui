@@ -11,17 +11,28 @@ struct Question: Identifiable {
     var id = UUID()
     var table: Int
     var value: Int
+    var answers: [Int]
 
     static func generate(table: Int, numQuestions: Int) -> [Question] {
         var result = [Question]()
         for _ in 0..<numQuestions {
-            let question = Question(table: table, value: Int.random(in: 1...10))
+
+            var answers = [Int]()
+            for i in 1...10 {
+                answers.append(i*table)
+            }
+            answers.shuffle()
+
+            let question = Question(table: table,
+                                    value: Int.random(in: 1...10),
+                                    answers: answers)
             result.append(question)
         }
         return result
     }
 
     func checkResult(_ answer: Int) -> Bool {
+        print("Checking result for answer: \(answer) --> \(desiredAnswer == answer)")
         return desiredAnswer == answer
     }
 

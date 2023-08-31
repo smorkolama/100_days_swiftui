@@ -9,8 +9,6 @@ import SwiftUI
 
 let numQuestionsList = [5, 10, 20]
 
-
-
 struct ContentView: View {
     @State private var table = 2
     @State private var numQuestions = 5
@@ -48,8 +46,18 @@ struct ContentView: View {
             .navigationTitle("Tafels oefenen")
         }
         .fullScreenCover(isPresented: $showGameSheet) {
-            GameView(questions: Question.generate(table: table,
-                                                  numQuestions: numQuestions))
+            let questions = Question.generate(table: table,
+                                              numQuestions: numQuestions)
+
+            if let firstQuestion = questions.first {
+                GameView(questions: questions,
+                         correctAnswer: firstQuestion.desiredAnswer)
+            } else {
+                EmptyView()
+                    .onAppear {
+                        showGameSheet = false
+                    }
+            }
         }
     }
 }
