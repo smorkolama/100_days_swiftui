@@ -9,40 +9,43 @@ import SwiftUI
 
 
 struct ContentView: View {
+
+    enum LengthUnit: String, CaseIterable {
+        case meter = "Meter"
+        case kilometer = "Kilometer"
+        case feet = "Feet"
+        case mile = "Mile"
+    }
+
     @FocusState private var inputIsFocussed: Bool
     
     @State private var inputValue: Double = 10.0
-    private var units = ["Meter", "Kilometer", "Feet", "Mile"]
-    @State private var inputUnit = "Meter"
-    @State private var outputUnit = "Meter"
+    @State private var inputUnit: LengthUnit = .meter
+    @State private var outputUnit: LengthUnit = .meter
     
     var inputInMeters: Double {
         switch inputUnit {
-        case "Meter":
+        case .meter:
             return inputValue
-        case "Kilometer":
+        case .kilometer:
             return inputValue * 1000
-        case "Feet":
+        case .feet:
             return inputValue * 0.3048
-        case "Mile":
+        case .mile:
             return inputValue * 1609.344
-        default:
-            return -1
         }
     }
     
     var outputValue: Double {
         switch outputUnit {
-        case "Meter":
+        case .meter:
             return inputInMeters
-        case "Kilometer":
+        case .kilometer:
             return inputInMeters / 1000
-        case "Feet":
+        case .feet:
             return inputInMeters / 0.3048
-        case "Mile":
+        case .mile:
             return inputInMeters / 1609.344
-        default:
-            return -1
         }
     }
     
@@ -54,8 +57,8 @@ struct ContentView: View {
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocussed)
                     Picker("Input unit", selection: $inputUnit) {
-                        ForEach(units, id: \.self) { unit in
-                            Text(unit)
+                        ForEach(LengthUnit.allCases, id: \.self) { unit in
+                            Text(unit.rawValue)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -66,8 +69,8 @@ struct ContentView: View {
                 
                 Section {
                     Picker("Output unit", selection: $outputUnit) {
-                        ForEach(units, id: \.self) { unit in
-                            Text(unit)
+                        ForEach(LengthUnit.allCases, id: \.self) { unit in
+                            Text(unit.rawValue)
                         }
                     }
                     .pickerStyle(.segmented)
