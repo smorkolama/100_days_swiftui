@@ -11,6 +11,8 @@ struct ContentView: View {
     @StateObject var expenses = Expenses()
     @State private var showingAddExpense = false
 
+    @AppStorage("currency") private var userCurency = "EUR"
+
     var body: some View {
         NavigationView {
             List {
@@ -23,21 +25,36 @@ struct ContentView: View {
                         }
 
                         Spacer()
-                        Text(item.amount, format: .currency(code: "USD"))
+                        Text(item.amount, format: .currency(code: userCurency))
                     }
                 }
                 .onDelete(perform: removeItems)
             }
             .navigationTitle("iExpense")
             .toolbar {
-                Button {
-                    showingAddExpense.toggle()
-                } label: {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddExpense.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+
+                ToolbarItem(placement: .bottomBar) {
+                    Menu {
+                        Button("Euro") {
+                            userCurency = "EUR"
+                        }
+                        Button("Dollar") {
+                            userCurency = "USD"
+                        }
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
                 }
             }
             .sheet(isPresented: $showingAddExpense) {
-                AddView(expenses: expenses)
+                AddView(expenses: expenses, userCurency: userCurency)
             }
         }
     }
